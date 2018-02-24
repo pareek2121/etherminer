@@ -17,6 +17,6 @@ RUN mkdir /miner && \
     
 RUN cd bin/ && \
     touch /miner/bin/start.sh && \
-    echo "/miner/bin/ethminer --farm-recheck 200 -G -S eu1.ethermine.org:4444 -FS us1.ethermine.org:4444 -O 0x9ef9c1b6e4395df8EEc59E7C9cdC9F126B6b9876.$1" >> start.sh
+    echo "/miner/bin/ethminer --farm-recheck 200 -G -S eu1.ethermine.org:4444 -FS us1.ethermine.org:4444 -O $ETH_ADDRESS.$(hostname)" >> start.sh
     
 ENTRYPOINT ["bash", "/miner/bin/start.sh"]
