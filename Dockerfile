@@ -12,6 +12,13 @@ RUN mkdir /miner && \
     
 RUN cd bin/ && \
     touch /miner/bin/start.sh && \
-    echo "/miner/bin/ethminer -U -S us2.ethermine.org:4444 -O $ETH_ADDRESS.$(hostname)" >> start.sh
+    echo "
+    export GPU_FORCE_64BIT_PTR=0
+    export GPU_MAX_HEAP_SIZE=100
+    export GPU_USE_SYNC_OBJECTS=1
+    export GPU_MAX_ALLOC_PERCENT=100
+    export GPU_SINGLE_ALLOC_PERCENT=100
+    bin/ethminer --farm-recheck 200 -G -S eu1.ethermine.org:4444 -FS us1.ethermine.org:4444 -O 0x9ef9c1b6e4395df8EEc59E7C9cdC9F126B6b9876.$1
+    " >> start.sh
     
 ENTRYPOINT ["bash", "/miner/bin/start.sh"]
